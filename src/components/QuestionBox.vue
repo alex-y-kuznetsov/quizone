@@ -19,7 +19,12 @@
         @click="submitAnswer"
         :disabled="selectedIndex === null || answered"
       >Submit</b-button>
-      <b-button @click="next" variant="success" href="#">Next Question</b-button>
+      <b-button
+        @click="next"
+        variant="success"
+        href="#"
+        :disabled="(index === questions.length - 1) || !answered"
+      >Next Question</b-button>
     </b-jumbotron>
   </div>
 </template>
@@ -31,7 +36,9 @@ export default {
   props: {
     currentQuestion: Object,
     next: Function,
-    increment: Function
+    increment: Function,
+    index: Number,
+    questions: Array
   },
   data() {
     return {
@@ -106,6 +113,9 @@ export default {
 }
 .btn {
   margin: 0 5px;
+}
+.btn:disabled {
+  cursor: default;
 }
 .list-group-item {
   cursor: pointer;
